@@ -1,0 +1,9 @@
+export { LandingPage } from "./LandingPage";
+export { LandingNavbar } from "./LandingNavbar";
+export { LandingFooter } from "./LandingFooter";
+export { HeroSection } from "./HeroSection";
+export { FeaturesSection } from "./FeaturesSection";
+export { HowItWorksSection } from "./HowItWorksSection";
+export { EduSection } from "./EduSection";
+export { CtaSection } from "./CtaSection";
+export { StatsSection } from "./StatsSection";

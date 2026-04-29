@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './landing.css';
+
+@layer base {
+  :root {
+    --color-primary: #154232;
+    --color-secondary: #3C6A09;
+    --color-faint: #BCF1AE;
+    --color-surface: #F5F5F0;
+    --color-container: #EEEEE9;
+    --color-text: #1C1C1B;
+    --color-muted: #A7A799;
+    --color-error: #CC3300;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-article {
+    font-family: var(--font-merriweather), serif;
+  }
+}
