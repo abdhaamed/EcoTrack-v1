@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export function HeroSection() {
   return (
     <>
@@ -20,9 +22,9 @@ export function HeroSection() {
             lingkungan.
           </p>
           <div className="hero-actions anim anim-4">
-            <a href="#cta" className="btn-primary">
+            <Link href="/auth/register" className="btn-primary">
               Mulai Sekarang
-            </a>
+            </Link>
             <a href="#how-it-works" className="btn-outline">
               Pelajari Cara Kerja
             </a>

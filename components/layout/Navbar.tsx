@@ -25,8 +25,8 @@ export const Navbar = () => {
             <Link href="/services">Services</Link>
           </li>
           <li>
-            <Link href="/#cta" className="nav-cta">
-              Bergabung
+            <Link href="/auth/register" className="nav-cta">
+              Bergabung / Login
             </Link>
           </li>
         </ul>
