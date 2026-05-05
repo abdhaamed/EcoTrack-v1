@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import './landing.css';
+@import './dashboard.css';
 
 @layer base {
   :root {
