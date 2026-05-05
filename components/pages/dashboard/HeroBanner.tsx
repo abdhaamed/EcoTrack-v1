@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Link from "next/link";
+
 export default function HeroBanner() {
   return (
     <section className="hero-banner animate-fade-in-up" id="hero-banner">
@@ -19,7 +21,7 @@ export default function HeroBanner() {
         <p>
           Setiap laporan adalah data berharga untuk masa depan bumi yang lebih hijau.
         </p>
-        <button className="hero-cta-btn" id="btn-new-report">
+        <Link href="/reports/create" className="hero-cta-btn" id="btn-new-report">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
             <polyline points="14 2 14 8 20 8" />
@@ -27,7 +29,7 @@ export default function HeroBanner() {
             <line x1="9" y1="15" x2="15" y2="15" />
           </svg>
           Buat Laporan Baru
-        </button>
+        </Link>
       </div>
     </section>
   );
