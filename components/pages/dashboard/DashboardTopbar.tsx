@@ -1,6 +1,32 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
 export default function DashboardTopbar() {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q')?.toString() || "");
+
+  // Update URL search params when search query changes
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    if (searchQuery) {
+      params.set('q', searchQuery);
+    } else {
+      params.delete('q');
+    }
+    
+    // Debounce the URL update
+    const timeout = setTimeout(() => {
+      replace(`${pathname}?${params.toString()}`);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [searchQuery, pathname, replace, searchParams]);
+
   return (
     <div className="dashboard-topbar">
       {/* Search */}
@@ -13,6 +39,8 @@ export default function DashboardTopbar() {
           type="text"
           placeholder="Cari laporan atau edukasi..."
           id="dashboard-search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
 

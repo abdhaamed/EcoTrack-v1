@@ -1,29 +1,37 @@
-// ASSIGNED TO: Hamid
-// CONTRACT: Async auth helpers wrapping Supabase auth (stub only)
-
-// Imports:
-// import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 
 /**
  * Gets the current session.
- * Stub implementation: always returns null.
  */
-export async function getSession(): Promise<unknown | null> {
-  return null;
+export async function getSession() {
+  const supabase = createClient()
+  try {
+    const { data: { session } } = await supabase.auth.getSession()
+    return session
+  } catch (error) {
+    console.error('Error fetching session:', error)
+    return null
+  }
 }
 
 /**
  * Gets the current user.
- * Stub implementation: always returns null.
  */
-export async function getCurrentUser(): Promise<unknown | null> {
-  return null;
+export async function getCurrentUser() {
+  const supabase = createClient()
+  try {
+    const { data: { user } } = await supabase.auth.getUser()
+    return user
+  } catch (error) {
+    console.error('Error fetching user:', error)
+    return null
+  }
 }
 
 /**
  * Signs out the current user.
- * Stub implementation: always returns null.
  */
-export async function signOut(): Promise<null> {
-  return null;
+export async function signOut() {
+  const supabase = createClient()
+  await supabase.auth.signOut()
 }

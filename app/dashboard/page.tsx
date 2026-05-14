@@ -4,6 +4,7 @@ import ImpactCard from "@/components/pages/dashboard/ImpactCard";
 import ActivityCard from "@/components/pages/dashboard/ActivityCard";
 import WasteMapCard from "@/components/pages/dashboard/WasteMapCard";
 import ArticlesSection from "@/components/pages/dashboard/ArticlesSection";
+import OptimisticRecentReports from "@/components/pages/dashboard/OptimisticRecentReports";
 
 export default function DashboardPage() {
   return (
@@ -18,6 +19,9 @@ export default function DashboardPage() {
           <div>
             <ImpactCard />
             <ActivityCard />
+            <div className="mt-6">
+              <OptimisticRecentReports initialReports={[]} />
+            </div>
           </div>
 
           {/* Right column: Map */}

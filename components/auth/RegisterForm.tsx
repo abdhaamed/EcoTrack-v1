@@ -1,32 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { signUp } from '@/app/actions/auth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
 
-interface RegisterFormProps {
-  onSuccess?: () => void;
-}
-
-export default function RegisterForm({ onSuccess }: RegisterFormProps) {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function RegisterForm() {
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setIsLoading(true);
-    // Simulate register API call
-    setTimeout(() => {
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
+    const result = await signUp(formData);
+
+    if (result?.error) {
+      setError(result.error);
       setIsLoading(false);
-      if (onSuccess) onSuccess();
-      router.push('/dashboard');
-    }, 1000);
-  };
+    }
+  }
 
   return (
     <Card variant="bone" className="p-8 max-w-md w-full mx-auto">
@@ -35,12 +31,16 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
         <p className="text-mist text-sm mt-2">Daftar sekarang untuk memulai dampak positif</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {error && (
+          <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg border border-red-100">
+            {error}
+          </div>
+        )}
         <div>
           <label className="block text-sm font-medium mb-1 text-charcoal">Nama Lengkap</label>
           <Input 
+            name="name"
             type="text" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
             placeholder="Masukkan nama lengkapmu" 
             required 
           />
@@ -48,9 +48,8 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
         <div>
           <label className="block text-sm font-medium mb-1 text-charcoal">Email</label>
           <Input 
+            name="email"
             type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
             placeholder="nama@email.com" 
             required 
           />
@@ -58,9 +57,8 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
         <div>
           <label className="block text-sm font-medium mb-1 text-charcoal">Password</label>
           <Input 
+            name="password"
             type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
             placeholder="Minimal 8 karakter" 
             required 
             minLength={8}

@@ -1,21 +1,50 @@
 'use server';
 
-/**
- * Imports (comment-only as requested):
- * import { createClient } from '@/lib/supabase/server';
- * import { WasteReportPayload, WasteReportResult } from '@/types/waste';
- */
+import { createClient } from '@/lib/supabase/server';
+import { WasteReportSchema } from '@/lib/validations/waste';
+import { WasteReportResult } from '@/types/waste';
+import { revalidatePath } from 'next/cache';
 
 /**
  * Submits a new waste report to Supabase.
- * 
- * Contract:
- * 1. Validate payload fields.
- * 2. Insert into 'waste_reports' table using Supabase client.
- * 3. Return success/error result.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function submitWasteReport(payload: unknown): Promise<{ success: boolean; error?: string }> {
-  // Stub implementation
-  return { success: false, error: 'not implemented' };
+export async function submitWasteReport(payload: unknown): Promise<WasteReportResult> {
+  const supabase = createClient();
+
+  // 1. Validate payload fields
+  const validation = WasteReportSchema.safeParse(payload);
+
+  if (!validation.success) {
+    const errorMessage = validation.error.errors.map(e => e.message).join(', ');
+    return { success: false, error: errorMessage };
+  }
+
+  const data = validation.data;
+
+  // 2. Insert into 'waste_reports' table using Supabase client.
+  // We map camelCase (Zod/Frontend) to snake_case (Database)
+  const { data: insertedData, error } = await supabase
+    .from('waste_reports')
+    .insert({
+      user_id: data.userId,
+      waste_type: data.wasteType,
+      estimated_weight: data.estimatedWeight,
+      photo_url: data.photoUrl,
+      location_address: data.locationAddress,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      status: 'PENDING',
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Supabase Error:', error);
+    return { success: false, error: 'Gagal menyimpan laporan ke database' };
+  }
+
+  // 3. Revalidate path to update UI
+  revalidatePath('/dashboard');
+
+  return { success: true, data: insertedData };
 }
