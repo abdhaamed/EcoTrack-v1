@@ -1,7 +1,26 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
+// Mock client for when Supabase is disabled
+const createMockServerClient = () => ({
+  auth: {
+    getSession: async () => ({ data: { session: null }, error: null }),
+    getUser: async () => ({ data: { user: null }, error: null }),
+    signOut: async () => ({ error: null }),
+    signInWithPassword: async () => ({ error: { message: 'Supabase is disabled' } }),
+    signUp: async () => ({ error: { message: 'Supabase is disabled' } }),
+  },
+  from: () => ({
+    insert: () => ({ select: () => ({ single: async () => ({ data: null, error: { message: 'Supabase is disabled' } }) }) }),
+  }),
+})
+
 export const createClient = () => {
+  if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
+    console.warn('⚠️ Supabase is disabled (NEXT_PUBLIC_DISABLE_SUPABASE=true)')
+    return createMockServerClient()
+  }
+
   const cookieStore = cookies()
 
   return createServerClient(

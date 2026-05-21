@@ -14,6 +14,12 @@ export async function signIn(formData: FormData) {
   });
 
   if (error) {
+    if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
+      console.warn('⚠️ Supabase is disabled - sign in bypassed');
+      revalidatePath('/', 'layout');
+      redirect('/dashboard');
+      return;
+    }
     return { error: error.message };
   }
 
@@ -38,6 +44,12 @@ export async function signUp(formData: FormData) {
   });
 
   if (error) {
+    if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
+      console.warn('⚠️ Supabase is disabled - sign up bypassed');
+      revalidatePath('/', 'layout');
+      redirect('/dashboard');
+      return;
+    }
     return { error: error.message };
   }
 

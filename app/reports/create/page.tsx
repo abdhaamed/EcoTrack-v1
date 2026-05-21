@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Upload, CheckCircle2, AlertCircle } from "lucide-react";
+import { Upload, CheckCircle2, AlertCircle, MapPin, Loader } from "lucide-react";
 import { submitWasteReport } from "@/app/actions/waste";
 import { createClient } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,9 @@ export default function CreateReportPage() {
   const [photoName, setPhotoName] = useState("");
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
+  const [locationAddress, setLocationAddress] = useState("");
   const [locationStatus, setLocationStatus] = useState("");
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
@@ -33,22 +35,56 @@ export default function CreateReportPage() {
     setPhotoName(file ? file.name : "");
   };
 
+  // Reverse geocoding using Nominatim (OpenStreetMap)
+  const getAddressFromCoordinates = async (lat: number, lon: number) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+        { headers: { 'Accept-Language': 'id' } }
+      );
+      const data = await response.json();
+      return data.address?.city || data.address?.town || data.address?.village || `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+    } catch (error) {
+      console.error('Geocoding error:', error);
+      return `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+    }
+  };
+
   const handleDetectLocation = () => {
     if (!navigator.geolocation) {
-      setLocationStatus("Browser tidak mendukung GPS");
+      setLocationStatus("❌ Browser tidak mendukung GPS");
       return;
     }
 
-    setLocationStatus("Mendeteksi lokasi...");
+    setIsDetectingLocation(true);
+    setLocationStatus("📍 Mendeteksi lokasi...");
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-        setLocationStatus("Lokasi GPS berhasil dideteksi");
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        setLatitude(lat);
+        setLongitude(lon);
+
+        // Get address from coordinates
+        const address = await getAddressFromCoordinates(lat, lon);
+        setLocationAddress(address);
+        setLocationStatus("✅ Lokasi GPS berhasil dideteksi");
+        setIsDetectingLocation(false);
       },
-      () => setLocationStatus("Gagal mengambil lokasi dari GPS"),
-      { enableHighAccuracy: true, timeout: 10000 }
+      (error) => {
+        let errorMsg = "❌ Gagal mengambil lokasi dari GPS";
+        if (error.code === error.PERMISSION_DENIED) {
+          errorMsg = "❌ Izin lokasi ditolak. Silakan aktifkan izin GPS di browser";
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          errorMsg = "❌ Informasi lokasi tidak tersedia";
+        } else if (error.code === error.TIMEOUT) {
+          errorMsg = "❌ Waktu pencarian lokasi habis";
+        }
+        setLocationStatus(errorMsg);
+        setIsDetectingLocation(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   };
 
@@ -56,6 +92,11 @@ export default function CreateReportPage() {
     event.preventDefault();
     if (!userId) {
       setMessage({ type: 'error', text: "Anda harus login untuk mengirim laporan" });
+      return;
+    }
+
+    if (!latitude || !longitude) {
+      setMessage({ type: 'error', text: "Silakan deteksi lokasi terlebih dahulu" });
       return;
     }
 
@@ -67,9 +108,9 @@ export default function CreateReportPage() {
       wasteType: wasteType,
       estimatedWeight: parseFloat(estimatedWeight),
       photoUrl: "https://example.com/mock-upload.jpg", // Placeholder for actual upload
-      locationAddress: "Deteksi GPS",
-      latitude: latitude || 0,
-      longitude: longitude || 0,
+      locationAddress: locationAddress || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+      latitude: latitude,
+      longitude: longitude,
     };
 
     const result = await submitWasteReport(payload);
@@ -147,19 +188,43 @@ export default function CreateReportPage() {
 
           <div className="field flex flex-col gap-2">
             <label className="font-medium text-charcoal">Location</label>
-            <div className="flex gap-3 items-center">
+            <div className="space-y-3 relative">
               <button 
                 type="button" 
-                className="px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-black transition-all text-sm" 
+                disabled={isDetectingLocation}
+                className="w-full px-4 py-4 bg-green-700 text-white rounded-xl hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-semibold flex items-center justify-center gap-2 shadow-lg" 
                 onClick={handleDetectLocation}
               >
-                Detect Location
+                {isDetectingLocation ? (
+                  <>
+                    <Loader size={18} className="animate-spin" />
+                    Mendeteksi Lokasi...
+                  </>
+                ) : (
+                  <>
+                    <MapPin size={18} />
+                    Detect Location
+                  </>
+                )}
               </button>
-              <p className="text-sm text-mist">{locationStatus}</p>
+              
+              {locationStatus && (
+                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white border-2 border-gray-300 rounded-xl px-6 py-3 shadow-xl max-w-sm animate-in fade-in slide-in-from-top-2 duration-300">
+                  <p className="text-sm font-medium text-gray-900 text-center">{locationStatus}</p>
+                </div>
+              )}
+              
+              {latitude && longitude && (
+                <div className="p-4 bg-green-100 opacity-75 rounded-xl border border-green-300 space-y-2">
+                  <p className="text-sm font-medium text-green-800">
+                    📍 {locationAddress}
+                  </p>
+                  <p className="text-xs text-green-600">
+                    Koordinat: {latitude.toFixed(6)}, {longitude.toFixed(6)}
+                  </p>
+                </div>
+              )}
             </div>
-            {latitude && longitude && (
-              <p className="text-xs text-gray-400">Coords: {latitude.toFixed(4)}, {longitude.toFixed(4)}</p>
-            )}
           </div>
 
           <button 
