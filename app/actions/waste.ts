@@ -21,7 +21,23 @@ export async function submitWasteReport(payload: unknown): Promise<WasteReportRe
 
   const data = validation.data;
 
-  // 2. Insert into 'waste_reports' table using Supabase client.
+  // 2. If Supabase is disabled, return mock success
+  if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
+    console.warn('⚠️ Supabase is disabled - waste report would be saved if Supabase was enabled');
+    revalidatePath('/dashboard');
+    return {
+      success: true,
+      data: {
+        id: 'mock-' + Date.now(),
+        ...data,
+        status: 'PENDING',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+    };
+  }
+
+  // 3. Insert into 'waste_reports' table using Supabase client.
   // We map camelCase (Zod/Frontend) to snake_case (Database)
   const { data: insertedData, error } = await supabase
     .from('waste_reports')
@@ -43,7 +59,7 @@ export async function submitWasteReport(payload: unknown): Promise<WasteReportRe
     return { success: false, error: 'Gagal menyimpan laporan ke database' };
   }
 
-  // 3. Revalidate path to update UI
+  // 4. Revalidate path to update UI
   revalidatePath('/dashboard');
 
   return { success: true, data: insertedData };
