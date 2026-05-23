@@ -26,12 +26,24 @@ const navItems = [
     ),
   },
   {
-    label: "Points",
+    label: "Points History",
     href: "/dashboard/points",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    label: "My Redemptions",
+    href: "/dashboard/redemptions",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="3" width="15" height="13" />
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
       </svg>
     ),
   },
@@ -46,12 +58,34 @@ const navItems = [
     ),
   },
   {
+    label: "Leaderboard",
+    href: "/dashboard/leaderboard",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+        <circle cx="12" cy="8" r="7" />
+      </svg>
+    ),
+  },
+  {
     label: "Artikel Lingkungan",
     href: "/dashboard/articles",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+      </svg>
+    ),
+  },
+];
+
+const adminNavItems = [
+  {
+    label: "Kelola Rewards",
+    href: "/dashboard/admin/rewards",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     ),
   },
@@ -71,7 +105,7 @@ export default function DashboardSidebar() {
       {/* Navigation */}
       <nav className="sidebar-nav">
         {navItems.map((item) => {
-          const isActive =
+          const is_active =
             item.href === "/dashboard"
               ? pathname === "/dashboard"
               : pathname.startsWith(item.href);
@@ -80,13 +114,31 @@ export default function DashboardSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`sidebar-nav-item ${isActive ? "active" : ""}`}
+              className={`sidebar-nav-item ${is_active ? "active" : ""}`}
             >
               {item.icon}
               {item.label}
             </Link>
           );
         })}
+
+        {/* Admin Section */}
+        <div className="mt-6 pt-4 border-t border-mist/30">
+          <p className="px-4 text-xs font-semibold text-muted uppercase tracking-wider mb-2">Admin</p>
+          {adminNavItems.map((item) => {
+            const is_active = pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`sidebar-nav-item ${is_active ? "active" : ""}`}
+              >
+                {item.icon}
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
       </nav>
 
       {/* Recycle Now FAB */}

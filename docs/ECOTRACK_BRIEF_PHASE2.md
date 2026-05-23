@@ -417,11 +417,11 @@ Existing files (DO NOT recreate or modify):
 // CONTRACT: Dashboard greeting and user summary section
 // Props:
 //   userName: string
-//   totalPoints: number
+//   total_points: number
 //   totalApproved: number
 // - Display greeting text: "Selamat datang, {userName}!"
 // - Display 2 summary stat cards side by side:
-//     Card 1: label "Total Poin Aktif", value = totalPoints
+//     Card 1: label "Total Poin Aktif", value = total_points
 //     Card 2: label "Laporan Disetujui", value = totalApproved
 // - CTA button: label "+ Laporkan Sampah", links to /reports/create
 // - Uses: Card, Button from components/ui/

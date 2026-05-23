@@ -486,7 +486,7 @@ Export these TypeScript interfaces (exact field names):
 interface User {
   id: string; name: string; email: string;
   role: 'user' | 'admin' | 'petugas';
-  photoUrl?: string; totalPoints: number; createdAt: string;
+  photoUrl?: string; total_points: number; createdAt: string;
 }
 interface WasteReport {
   id: string; userId: string; wasteType: string;
@@ -503,8 +503,8 @@ interface PointTransaction {
 }
 interface Reward {
   id: string; name: string; description: string;
-  imageUrl: string; pointsRequired: number;
-  stock: number; isActive: boolean; createdAt: string;
+  imageUrl: string; points_required: number;
+  stock: number; is_active: boolean; createdAt: string;
 }
 interface RewardRedemption {
   id: string; userId: string; rewardId: string;
@@ -529,7 +529,7 @@ interface DisposalLocation {
   id: string; name: string; type: 'TPS' | 'BANK_SAMPAH';
   address: string; latitude: number; longitude: number;
   operationalHours: string; acceptedWasteTypes: string;
-  contact: string; isActive: boolean; createdAt: string;
+  contact: string; is_active: boolean; createdAt: string;
 }
 interface Notification {
   id: string; userId: string;
@@ -1024,7 +1024,7 @@ interface ReportDetailModalProps {
 // ASSIGNED TO: Alfin
 // bg-deep-forest rounded-2xl p-8. Points: text-sapling-green font-extrabold text-5xl
 // Label: text-parchment/70
-interface PointsBalanceCardProps { totalPoints: number; }
+interface PointsBalanceCardProps { total_points: number; }
 
 ### components/points/PointsTransactionList.tsx
 // ASSIGNED TO: Alfin

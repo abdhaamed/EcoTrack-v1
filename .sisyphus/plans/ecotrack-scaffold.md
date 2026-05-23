@@ -333,7 +333,7 @@ Wave 4 (Raja + Rifqi domains): map + education components/pages + admin componen
 export interface User {
   id: string; name: string; email: string;
   role: 'user' | 'admin' | 'petugas';
-  photoUrl?: string; totalPoints: number; createdAt: string;
+  photoUrl?: string; total_points: number; createdAt: string;
 }
 
 export interface WasteReport {
@@ -353,8 +353,8 @@ export interface PointTransaction {
 
 export interface Reward {
   id: string; name: string; description: string;
-  imageUrl: string; pointsRequired: number;
-  stock: number; isActive: boolean; createdAt: string;
+  imageUrl: string; points_required: number;
+  stock: number; is_active: boolean; createdAt: string;
 }
 
 export interface RewardRedemption {
@@ -383,7 +383,7 @@ export interface DisposalLocation {
   id: string; name: string; type: 'TPS' | 'BANK_SAMPAH';
   address: string; latitude: number; longitude: number;
   operationalHours: string; acceptedWasteTypes: string;
-  contact: string; isActive: boolean; createdAt: string;
+  contact: string; is_active: boolean; createdAt: string;
 }
 
 export interface Notification {
@@ -576,7 +576,7 @@ export interface ReportDetailModalProps {
 
 #### components/points
 ```ts
-export interface PointsBalanceCardProps { totalPoints: number; }
+export interface PointsBalanceCardProps { total_points: number; }
 
 export interface PointsTransactionListProps { transactions: import('../../types').PointTransaction[]; }
 

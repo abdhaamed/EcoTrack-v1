@@ -5,13 +5,34 @@ import { cookies } from 'next/headers'
 const createMockServerClient = () => ({
   auth: {
     getSession: async () => ({ data: { session: null }, error: null }),
-    getUser: async () => ({ data: { user: null }, error: null }),
+    getUser: async () => ({ data: { user: { id: 'mock-user-1' } }, error: null }),
     signOut: async () => ({ error: null }),
     signInWithPassword: async () => ({ error: { message: 'Supabase is disabled' } }),
     signUp: async () => ({ error: { message: 'Supabase is disabled' } }),
   },
-  from: () => ({
-    insert: () => ({ select: () => ({ single: async () => ({ data: null, error: { message: 'Supabase is disabled' } }) }) }),
+  from: (table: string) => ({
+    select: (columns: string = '*') => ({
+      eq: () => ({
+        single: async () => ({ data: null, error: { message: 'Mock: not implemented' } }),
+        order: () => ({
+          limit: async () => ({ data: [], error: null }),
+          single: async () => ({ data: null, error: { message: 'Mock: not implemented' } }),
+        }),
+      }),
+      order: () => ({
+        limit: async () => ({ data: [], error: null }),
+      }),
+    }),
+    insert: (data: any) => ({
+      select: () => ({
+        single: async () => ({ data: { ...data, id: 'mock-' + Date.now() }, error: null }),
+      }),
+    }),
+    update: (data: any) => ({
+      eq: () => ({
+        single: async () => ({ data: { ...data }, error: null }),
+      }),
+    }),
   }),
 })
 
