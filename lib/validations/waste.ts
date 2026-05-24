@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
+const WASTE_TYPES = ['ORGANIK', 'ANORGANIK', 'B3', 'RESIDU'] as const;
+
 export const WasteReportSchema = z.object({
   userId: z.string().uuid({ message: "User ID must be a valid UUID" }),
-  wasteType: z.enum(['ORGANIK', 'ANORGANIK', 'B3', 'RESIDU'], {
-    errorMap: () => ({ message: "Jenis sampah harus salah satu dari: ORGANIK, ANORGANIK, B3, RESIDU" }),
+  wasteType: z.enum(WASTE_TYPES, {
+    message: "Jenis sampah harus salah satu dari: ORGANIK, ANORGANIK, B3, RESIDU"
   }),
   estimatedWeight: z.number().positive({ message: "Estimasi berat harus lebih dari 0" }),
   photoUrl: z.string().url({ message: "URL foto tidak valid" }),
