@@ -1,0 +1,14 @@
+import DashboardSidebar from "@/components/pages/dashboard/DashboardSidebar";
+
+export default function QuizLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="dashboard-layout">
+      <DashboardSidebar />
+      <main className="dashboard-main">{children}</main>
+    </div>
+  );
+}

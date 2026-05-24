@@ -8,6 +8,12 @@ export async function middleware(request: NextRequest) {
     },
   })
 
+  // Skip auth checks if Supabase is disabled
+  if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
+    console.log('⚠️ Auth checks disabled (NEXT_PUBLIC_DISABLE_SUPABASE=true)')
+    return response
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

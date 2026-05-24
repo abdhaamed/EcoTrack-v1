@@ -15,7 +15,7 @@ export async function submitWasteReport(payload: unknown): Promise<WasteReportRe
   const validation = WasteReportSchema.safeParse(payload);
 
   if (!validation.success) {
-    const errorMessage = validation.error.errors.map(e => e.message).join(', ');
+    const errorMessage = validation.error.issues.map((issue: { message: string }) => issue.message).join(', ');
     return { success: false, error: errorMessage };
   }
 
