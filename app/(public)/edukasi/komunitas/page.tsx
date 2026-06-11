@@ -36,7 +36,7 @@ export default function KomunitasTantanganPage() {
             </div>
             <h2 className="text-2xl font-bold text-deep-forest mb-3">Leaderboard Global</h2>
             <p className="text-charcoal opacity-80 leading-relaxed">
-              Bandingkan dampak lingkunganmu dengan pengguna lain di kotamu atau secara nasional. Kumpulkan poin sebanyak mungkin dan jadilah "Eco Warrior" terbaik bulan ini.
+              Bandingkan dampak lingkunganmu dengan pengguna lain di kotamu atau secara nasional. Kumpulkan poin sebanyak mungkin dan jadilah &quot;Eco Warrior&quot; terbaik bulan ini.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export default function KomunitasTantanganPage() {
             </div>
             <h2 className="text-2xl font-bold text-deep-forest mb-3">Tantangan Bulanan</h2>
             <p className="text-charcoal opacity-80 leading-relaxed">
-              Ikuti misi spesifik, misalnya: "Setor 10kg Kertas Bulan Ini" atau "Laporkan 5 Titik Sampah Liar". Selesaikan misi untuk mendapatkan badge khusus dan ekstra poin reward.
+              Ikuti misi spesifik, misalnya: &quot;Setor 10kg Kertas Bulan Ini&quot; atau &quot;Laporkan 5 Titik Sampah Liar&quot;. Selesaikan misi untuk mendapatkan badge khusus dan ekstra poin reward.
             </p>
           </div>
 

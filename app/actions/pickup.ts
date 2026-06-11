@@ -49,8 +49,8 @@ export async function submitPickupRequest(payload: PickupPayload) {
     if (error) throw new Error(error.message);
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Pickup submission error:", error);
-    return { success: false, error: error.message || "Gagal memesan penjemputan" };
+    return { success: false, error: (error as Error).message || "Gagal memesan penjemputan" };
   }
 }
