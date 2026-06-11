@@ -4,7 +4,8 @@ import { useState } from "react";
 import { validateWasteReport } from "@/app/actions/admin";
 import { Check, X, Loader2 } from "lucide-react";
 
-export default function AdminReportList({ initialReports }: { initialReports: Record<string, unknown>[] }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function AdminReportList({ initialReports }: { initialReports: any[] }) {
   const [reports, setReports] = useState(initialReports);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 

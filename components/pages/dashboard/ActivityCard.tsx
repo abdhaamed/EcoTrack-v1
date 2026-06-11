@@ -4,7 +4,8 @@ import { Clock, CheckCircle, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
 interface ActivityCardProps {
-  reports?: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reports?: any[];
 }
 
 export default function ActivityCard({ reports = [] }: ActivityCardProps) {

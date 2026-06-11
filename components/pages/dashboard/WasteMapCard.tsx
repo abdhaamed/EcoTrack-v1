@@ -10,7 +10,8 @@ const DashboardMap = dynamic(() => import("@/components/pages/dashboard/Dashboar
 });
 
 interface WasteMapCardProps {
-  reports?: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reports?: any[];
 }
 
 export default function WasteMapCard({ reports = [] }: WasteMapCardProps) {
