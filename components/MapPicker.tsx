@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -21,6 +21,7 @@ interface MapPickerProps {
   defaultPosition?: [number, number];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function LocationMarker({ position, setPosition, onLocationSelect }: any) {
   useMapEvents({
     click(e) {

@@ -12,7 +12,7 @@ export default function DailyQuizBox() {
 
       <div className="quiz-meta">
         <div className="quiz-meta-item">
-          <span className="meta-label">Today's Progress</span>
+          <span className="meta-label">Today&apos;s Progress</span>
           <span className="meta-value">0/3 Questions</span>
         </div>
       </div>

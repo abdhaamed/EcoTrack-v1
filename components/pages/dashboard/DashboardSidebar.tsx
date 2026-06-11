@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Map, Home, Award, Gift, BookOpen, Recycle, Settings, HelpCircle, MapPin, Truck } from "lucide-react";
+import { Map, Award, Gift, BookOpen, Recycle, Settings, HelpCircle, Truck } from "lucide-react";
 
 const navItems = [
   {

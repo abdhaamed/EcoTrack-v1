@@ -14,6 +14,7 @@ export default async function PointsPage() {
 
   const supabase = createClient();
   let userPoints = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let transactions: any[] = [];
   let success = false;
   let errorMsg = "";

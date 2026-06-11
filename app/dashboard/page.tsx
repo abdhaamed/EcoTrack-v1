@@ -17,6 +17,7 @@ export default async function DashboardPage() {
   
   let points = 0;
   let reportsCount = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let recentReports: any[] = [];
 
   if (user && process.env.NEXT_PUBLIC_DISABLE_SUPABASE !== "true") {

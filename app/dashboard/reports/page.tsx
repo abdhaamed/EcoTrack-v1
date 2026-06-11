@@ -14,6 +14,7 @@ export default async function ReportsPage() {
   if (!user) redirect("/auth/login");
 
   const supabase = createClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let reports: any[] = [];
   let success = false;
   let errorMsg = "";

@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { FilePlus, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 
 export default function HeroBanner() {
   return (

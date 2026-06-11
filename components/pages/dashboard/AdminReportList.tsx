@@ -4,7 +4,7 @@ import { useState } from "react";
 import { validateWasteReport } from "@/app/actions/admin";
 import { Check, X, Loader2 } from "lucide-react";
 
-export default function AdminReportList({ initialReports }: { initialReports: any[] }) {
+export default function AdminReportList({ initialReports }: { initialReports: Record<string, unknown>[] }) {
   const [reports, setReports] = useState(initialReports);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ export default function AdminReportList({ initialReports }: { initialReports: an
       } else {
         alert("Gagal memproses laporan: " + res.error);
       }
-    } catch (error) {
+    } catch {
       alert("Terjadi kesalahan sistem");
     } finally {
       setLoadingId(null);

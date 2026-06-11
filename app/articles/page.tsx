@@ -42,6 +42,7 @@ export default async function ArticlesPage() {
           <div className="bg-red-50 p-4 rounded-xl text-red-600">{error || "Terjadi kesalahan memuat artikel."}</div>
         ) : articles && articles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {articles.map((article: any) => (
               <article key={article.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col">
                 <div className="h-48 relative overflow-hidden group">

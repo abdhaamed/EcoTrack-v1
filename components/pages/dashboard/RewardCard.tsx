@@ -42,7 +42,7 @@ export default function RewardCard({ reward, userId, userPoints }: RewardCardPro
       } else {
         alert(`Gagal menukar: ${res.error}`);
       }
-    } catch (error) {
+    } catch {
       alert("Terjadi kesalahan sistem saat mencoba menukar hadiah.");
     } finally {
       setLoading(false);

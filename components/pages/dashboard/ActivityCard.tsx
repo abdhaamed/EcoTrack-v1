@@ -4,7 +4,7 @@ import { Clock, CheckCircle, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
 interface ActivityCardProps {
-  reports?: any[];
+  reports?: Record<string, unknown>[];
 }
 
 export default function ActivityCard({ reports = [] }: ActivityCardProps) {

@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect, useState } from "react";
+
 
 // Fix Leaflet's default icon path issues in Next.js
 const defaultIcon = new L.Icon({
