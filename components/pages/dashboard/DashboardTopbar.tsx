@@ -3,6 +3,8 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { signOut } from "@/app/actions/auth";
+import { Search, Bell, User, LogOut } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function DashboardTopbar() {
   const searchParams = useSearchParams();
@@ -55,17 +57,7 @@ export default function DashboardTopbar() {
     <div className="dashboard-topbar">
       {/* Search */}
       <div className="topbar-search">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
+        <Search className="w-5 h-5 text-gray-400" />
         <input
           type="text"
           placeholder="Cari laporan atau edukasi..."
@@ -77,22 +69,13 @@ export default function DashboardTopbar() {
 
       {/* Actions */}
       <div className="topbar-actions">
+        <ThemeToggle />
         <button
           className="topbar-icon-btn"
           aria-label="Notifications"
           id="btn-notifications"
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 01-3.46 0" />
-          </svg>
+          <Bell className="w-5 h-5" />
           <span className="notification-dot" />
         </button>
         <div className="relative" ref={profileRef}>
@@ -102,17 +85,7 @@ export default function DashboardTopbar() {
             id="btn-profile"
             onClick={() => setIsProfileOpen(!isProfileOpen)}
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+            <User className="w-5 h-5" />
           </button>
 
           {isProfileOpen && (
@@ -121,19 +94,7 @@ export default function DashboardTopbar() {
                 onClick={handleSignOut}
                 className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 transition-colors"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-4 h-4"
-                >
-                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
+                <LogOut className="w-4 h-4" />
                 Sign Out
               </button>
             </div>

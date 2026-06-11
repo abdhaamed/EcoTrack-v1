@@ -15,9 +15,9 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         className={cn(
           "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-deep-forest",
           {
-            "bg-feedback-success text-parchment": variant === "success",
+            "bg-feedback-success text-white": variant === "success",
             "bg-sapling-green text-charcoal": variant === "warning",
-            "bg-feedback-error text-parchment": variant === "error",
+            "bg-feedback-error text-white": variant === "error",
             "bg-mist text-charcoal": variant === "info",
             "bg-bone text-charcoal": variant === "neutral",
           },

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Navbar = () => {
   return (
@@ -24,9 +25,10 @@ export const Navbar = () => {
           <li>
             <Link href="/services">Services</Link>
           </li>
-          <li>
+          <li className="flex items-center gap-4">
+            <ThemeToggle />
             <Link href="/auth/register" className="nav-cta">
-              Bergabung / Login
+              Join Us
             </Link>
           </li>
         </ul>

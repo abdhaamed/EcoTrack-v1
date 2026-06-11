@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,24 +10,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "deep-forest": "#154232",
-        "veridian-leaf": "#3C6A09",
-        "sapling-green": "#BCF1AE",
-        parchment: "#F5F5F0",
-        bone: "#EEEEE9",
-        charcoal: "#1C1C1B",
-        mist: "#A7A799",
-        "feedback-success": "#3C6A09",
-        "feedback-error": "#CC3300",
-        "feedback-link": "#154232",
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        background: "var(--color-surface)",
-        faint: "var(--color-faint)",
-        surface: "var(--color-surface)",
-        container: "var(--color-container)",
-        text: "var(--color-text)",
-        muted: "var(--color-muted)",
+        "deep-forest": "var(--primary-700)",
+        "veridian-leaf": "var(--primary-500)",
+        "sapling-green": "var(--primary-100)",
+        parchment: "var(--surface)",
+        bone: "var(--surface-container)",
+        charcoal: "var(--on-surface)",
+        mist: "var(--neutral-500)",
+        "feedback-success": "var(--primary-500)",
+        "feedback-error": "var(--color-error)",
+        "feedback-link": "var(--primary-700)",
+        primary: "var(--primary-700)",
+        secondary: "var(--primary-500)",
+        background: "var(--surface)",
+        faint: "var(--primary-100)",
+        surface: "var(--surface)",
+        container: "var(--surface-container)",
+        text: "var(--on-surface)",
+        muted: "var(--neutral-500)",
         error: "var(--color-error)",
       },
       borderRadius: {

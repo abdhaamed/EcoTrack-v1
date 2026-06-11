@@ -1,7 +1,7 @@
 import { createBrowserClient } from '@supabase/ssr'
 
 // Mock client for when Supabase is disabled
-const createMockClient = () => ({
+const createMockClient = (): any => ({
   auth: {
     getSession: async () => ({ data: { session: null }, error: null }),
     getUser: async () => ({ data: { user: null }, error: null }),

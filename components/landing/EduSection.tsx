@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Recycle, Globe, Home, Users } from "lucide-react";
 
 export function EduSection() {
   return (
@@ -65,7 +66,9 @@ export function EduSection() {
         <div className="edu-secondary">
           <Link href="/edukasi/pilah-sampah" className="edu-card-link">
             <div className="edu-card edu-card-interactive">
-              <div className="edu-card-icon">♻️</div>
+              <div className="edu-card-icon flex items-center justify-center">
+                <Recycle className="w-5 h-5 text-green-600" />
+              </div>
               <div>
                 <h4>Panduan Pilah Sampah</h4>
                 <p>
@@ -77,7 +80,9 @@ export function EduSection() {
           </Link>
           <Link href="/edukasi/dampak-lingkungan" className="edu-card-link">
             <div className="edu-card edu-card-interactive">
-              <div className="edu-card-icon">🌍</div>
+              <div className="edu-card-icon flex items-center justify-center">
+                <Globe className="w-5 h-5 text-blue-600" />
+              </div>
               <div>
                 <h4>Dampak untuk Lingkungan</h4>
                 <p>
@@ -89,7 +94,9 @@ export function EduSection() {
           </Link>
           <Link href="/edukasi/pelaporan-lokasi" className="edu-card-link">
             <div className="edu-card edu-card-interactive">
-              <div className="edu-card-icon">🏘️</div>
+              <div className="edu-card-icon flex items-center justify-center">
+                <Home className="w-5 h-5 text-red-500" />
+              </div>
               <div>
                 <h4>Pelaporan Berbasis Lokasi</h4>
                 <p>
@@ -101,7 +108,9 @@ export function EduSection() {
           </Link>
           <Link href="/edukasi/komunitas" className="edu-card-link">
             <div className="edu-card edu-card-interactive">
-              <div className="edu-card-icon">🤝</div>
+              <div className="edu-card-icon flex items-center justify-center">
+                <Users className="w-5 h-5 text-yellow-600" />
+              </div>
               <div>
                 <h4>Komunitas &amp; Tantangan</h4>
                 <p>

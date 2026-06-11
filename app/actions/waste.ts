@@ -21,23 +21,13 @@ export async function submitWasteReport(payload: unknown): Promise<WasteReportRe
 
   const data = validation.data;
 
-  // 2. If Supabase is disabled, return mock success
-  if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === 'true') {
-    console.warn('⚠️ Supabase is disabled - waste report would be saved if Supabase was enabled');
+  if (process.env.NEXT_PUBLIC_DISABLE_SUPABASE === "true") {
+    console.warn("⚠️ Supabase is disabled - waste report bypassed");
     revalidatePath('/dashboard');
-    return {
-      success: true,
-      data: {
-        id: 'mock-' + Date.now(),
-        ...data,
-        status: 'PENDING',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      },
-    };
+    return { success: true, data: { id: "dummy-123", status: "PENDING", ...data } };
   }
 
-  // 3. Insert into 'waste_reports' table using Supabase client.
+  // 2. Insert into 'waste_reports' table using Supabase client.
   // We map camelCase (Zod/Frontend) to snake_case (Database)
   const { data: insertedData, error } = await supabase
     .from('waste_reports')

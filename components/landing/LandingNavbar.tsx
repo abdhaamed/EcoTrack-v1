@@ -1,4 +1,6 @@
+import React from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function LandingNavbar() {
   return (
@@ -18,10 +20,14 @@ export function LandingNavbar() {
           <li>
             <a href="#edukasi">Edukasi</a>
           </li>
-          <li>
-            <a href="#cta" className="nav-cta">
-              Bergabung
-            </a>
+          <li className="flex items-center gap-3 ml-4">
+            <ThemeToggle />
+            <Link href="/login" className="btn-outline">
+              Masuk
+            </Link>
+            <Link href="/register" className="btn-primary">
+              Daftar
+            </Link>
           </li>
         </ul>
       </nav>

@@ -7,49 +7,10 @@
 /* =========================================================
    DESIGN TOKENS (Landing-specific)
    ========================================================= */
-:root {
-    --primary-50: #e8ece7;
-    --primary-100: #d1d9cf;
-    --primary-200: #a3b39f;
-    --primary-300: #758d6f;
-    --primary-400: #47673f;
-    --primary-500: #154212;
-    --primary-600: #123810;
-    --primary-700: #0e340d;
-    --primary-800: #0b2d0b;
-    --primary-900: #082608;
-
-    --secondary-50: #ebeeea;
-    --secondary-200: #b0bcaa;
-    --secondary-400: #627a56;
-    --secondary-500: #2d5a27;
-
-    --neutral-50: #f1f2f0;
-    --neutral-100: #e2e4e1;
-    --neutral-400: #a8aea5;
-    --neutral-500: #72796e;
-    --neutral-900: #2f312e;
-
-    --surface: #fafaf5;
-    --surface-container: #eeeee9;
-    --on-surface: #1a1c19;
-
-    --accent-green: #bcf0ae;
-
-    --font-display:
-        var(--font-plus-jakarta-sans), "Plus Jakarta Sans", sans-serif;
-    --font-body: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", sans-serif;
-
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 24px;
-    --radius-xl: 36px;
-
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-sm: 0 2px 8px rgba(21, 66, 18, 0.07);
-    --shadow-md: 0 8px 28px rgba(21, 66, 18, 0.12);
-    --shadow-lg: 0 20px 60px rgba(21, 66, 18, 0.18);
-}
+/* =========================================================
+   DESIGN TOKENS (Landing-specific)
+   ========================================================= */
+/* Variabel warna telah dipindahkan ke globals.css untuk mendukung dark mode secara global */
 
 /* =========================================================
    LANDING BODY OVERRIDE
@@ -73,10 +34,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2.5rem;
-    background: rgba(250, 250, 245, 0.88);
+    background: var(--surface);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(21, 66, 18, 0.08);
+    border-bottom: 1px solid rgba(21, 66, 18, 0.2);
 }
 
 .landing-navbar .logo {
@@ -284,6 +245,8 @@
     border-radius: var(--radius-lg);
     object-fit: cover;
     box-shadow: var(--shadow-lg);
+    transform-origin: center;
+    animation: highlightCenter 6s ease-in-out infinite;
 }
 
 .photo-card {
@@ -296,6 +259,7 @@
     box-shadow: var(--shadow-lg);
     width: 170px;
     transform: rotate(-2deg);
+    animation: floatRotate 6s ease-in-out infinite;
 }
 
 .photo-card img {
@@ -320,6 +284,7 @@
     padding: 0.7rem 1rem;
     font-size: 0.78rem;
     box-shadow: var(--shadow-md);
+    animation: float 5s ease-in-out infinite;
 }
 
 .stat-pill strong {
@@ -333,8 +298,8 @@
    ========================================================= */
 .impact-banner {
     background: var(--surface-container);
-    border-top: 1px solid var(--primary-100);
-    border-bottom: 1px solid var(--primary-100);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     padding: 2.2rem 2.5rem;
 }
 
@@ -431,7 +396,7 @@
 
 .feature-card {
     background: var(--surface-container);
-    border: 1px solid var(--primary-100);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 2rem;
     transition: var(--transition);
@@ -703,7 +668,7 @@
 
 .edu-card {
     background: var(--surface-container);
-    border: 1px solid var(--primary-100);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 1.5rem 1.75rem;
     display: flex;
@@ -713,8 +678,9 @@
 }
 
 .edu-card:hover {
-    transform: translateX(4px);
+    transform: translateY(-4px);
     border-color: var(--primary-300);
+    box-shadow: var(--shadow-md);
 }
 
 .edu-card-interactive {
@@ -763,7 +729,7 @@
     max-width: 620px;
     margin: 0 auto;
     background: var(--surface-container);
-    border: 1px solid var(--primary-100);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-xl);
     padding: 3.5rem 3rem;
 }
@@ -803,7 +769,7 @@
     width: 100%;
     padding: 0.75rem 1rem;
     background: #fff;
-    border: 1.5px solid var(--primary-100);
+    border: 1.5px solid var(--border-color);
     border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 0.9rem;
@@ -901,6 +867,35 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes floatRotate {
+    0%, 100% {
+        transform: rotate(-2deg) translateY(0);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-12px);
+    }
+}
+
+@keyframes highlightCenter {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-lg);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 25px 80px rgba(188, 240, 174, 0.25);
     }
 }
 

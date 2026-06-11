@@ -1,34 +1,24 @@
 // ASSIGNED TO: Raja
 import React from 'react';
+import { TeamCard, TeamMember } from './TeamCard';
 
-export interface TeamMember {
-  name: string;
-  role: string;
-  photoUrl?: string;
-}
+const dummyMembers: TeamMember[] = [
+  { name: "Andi Saputra", role: "Founder & CEO", linkedin: "#", instagram: "#", github: "#" },
+  { name: "Budi Santoso", role: "CTO", linkedin: "#", instagram: "#", github: "#" },
+  { name: "Citra Lestari", role: "Head of Marketing", linkedin: "#", instagram: "#", github: "#" },
+  { name: "Dina Mariana", role: "Lead Designer", linkedin: "#", instagram: "#", github: "#" },
+];
 
-export interface TeamSectionProps {
-  members?: TeamMember[];
-}
-
-export const TeamSection = ({ members = [] }: TeamSectionProps) => {
+export const TeamSection = () => {
   return (
-    <section data-component="TeamSection" className="bg-parchment text-charcoal py-20 px-6">
+    <section data-component="TeamSection" className="bg-surface text-on-surface py-20 px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-center text-deep-forest">Meet Our Team</h2>
-        {members.length > 0 ? (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {members.map((member, index) => (
-              <div key={index} className="bg-bone p-6 rounded-card text-center">
-                <div className="w-24 h-24 bg-mist rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-bold">{member.name}</h3>
-                <p className="text-veridian-leaf">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-mist">Team members will be updated soon.</p>
-        )}
+        <h2 className="text-3xl font-bold mb-12 text-center text-primary-500">Meet Our Team</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {dummyMembers.map((member, index) => (
+            <TeamCard key={index} member={member} />
+          ))}
+        </div>
       </div>
     </section>
   );

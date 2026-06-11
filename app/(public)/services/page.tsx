@@ -62,11 +62,11 @@ export default function ServicesPage() {
       </section>
 
       {/* Placeholder for CtaSection since it might not be implemented yet in parallel tasks */}
-      <section data-component="CtaSection" className="bg-veridian-leaf text-parchment py-20 px-6 text-center">
+      <section data-component="CtaSection" className="bg-veridian-leaf text-white py-20 px-6 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 font-article">Siap Memulai Perubahan?</h2>
           <p className="text-lg mb-8 text-sapling-green">Bergabunglah dengan ribuan pengguna lainnya dalam misi menyelamatkan lingkungan.</p>
-          <button className="bg-sapling-green text-deep-forest px-8 py-3 rounded-btn font-bold hover:bg-parchment transition-colors">
+          <button className="bg-sapling-green text-deep-forest px-8 py-3 rounded-btn font-bold hover:bg-white transition-colors">
             Hubungi Kami
           </button>
         </div>
