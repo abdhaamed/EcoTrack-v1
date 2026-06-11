@@ -19,6 +19,7 @@ export default function SubmissionModal({ onClose }: SubmissionModalProps) {
   }, [router]);
 
   const handleClose = () => {
+    onClose();
     router.push("/articles");
   };
 

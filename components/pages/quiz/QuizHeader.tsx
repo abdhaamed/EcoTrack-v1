@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 interface QuizHeaderProps {
   currentQuestion: number;
@@ -12,9 +13,9 @@ export default function QuizHeader({
   totalQuestions,
 }: QuizHeaderProps) {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = require("react").useState(600);
+  const [timeLeft, setTimeLeft] = useState(600);
 
-  require("react").useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((prev: number) => (prev > 0 ? prev - 1 : 0));
     }, 1000);

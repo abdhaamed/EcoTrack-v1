@@ -2,6 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 // Mock client for when Supabase is disabled
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createMockServerClient = (): any => ({
   auth: {
     getSession: async () => ({ data: { session: null }, error: null }),

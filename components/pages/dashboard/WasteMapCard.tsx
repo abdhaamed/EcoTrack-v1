@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter, Focus, AlertTriangle, Shield, Send } from "lucide-react";
+import { Filter, Focus, Send } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -10,7 +10,7 @@ const DashboardMap = dynamic(() => import("@/components/pages/dashboard/Dashboar
 });
 
 interface WasteMapCardProps {
-  reports?: any[];
+  reports?: Record<string, unknown>[];
 }
 
 export default function WasteMapCard({ reports = [] }: WasteMapCardProps) {

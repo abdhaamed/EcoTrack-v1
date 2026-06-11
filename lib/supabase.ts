@@ -1,6 +1,7 @@
 import { createBrowserClient } from '@supabase/ssr'
 
 // Mock client for when Supabase is disabled
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createMockClient = (): any => ({
   auth: {
     getSession: async () => ({ data: { session: null }, error: null }),
